@@ -158,87 +158,87 @@ Process surface:LSX  U    su       1  Surface (10m) wind u (grid north)
                      THE  ept      1  Equivalent Potential Temp
            	     PS   sp	   1  Station Pressure (terrain following)
 		     VOR  vor	   1  Vorticity
-		                 MR   mr       1  Mixing Ratio  
-         	           MRC  mc       1  Moisture Flux Convergence
-        	           DIV  d	       1  Divergence
-		                 THA  pta      1  Potential Temp Advection
-		                 MRA  ma       1  Moisture Advection
-		                 SPD  spd	     1  Surface Wind Speed
-		                 CSS  cssi     1  CSSI
-		                 VIS  vis 	   1  Surface Visibility
+		     MR   mr       1  Mixing Ratio  
+         	     MRC  mc       1  Moisture Flux Convergence
+        	     DIV  d	   1  Divergence
+		     THA  pta      1  Potential Temp Advection
+		     MRA  ma       1  Moisture Advection
+		     SPD  spd	   1  Surface Wind Speed
+		     CSS  cssi     1  CSSI
+		     VIS  vis 	   1  Surface Visibility
                      FWX  fwx      1  Fire Danger (LAPS / Kelsch)
-		                 HI   hi       1  Heat Index
+		     HI   hi       1  Heat Index
 
 Process temp:   LT1  T3   t	  21  Temperature
-		            HT   z       21  Height (geopotential meters)
+		     HT   z       21  Height (geopotential meters)
 
                 PBL  PTP  ptp      1  Boundary Layer Top (pressure)
                      PDM  pdm      1  Boundary Layer Depth (in meters)
 
 Process accum:	L1S  S01  s1hr     1  Snow Accum Cycle 
-		                 STO  stot     1  Snow Accum Storm Tot 
-          	         R01  pc	     1  Liq Accum Cycle 
-        	           RTO  pt	     1  Liq Accum Storm Tot 
+		     STO  stot     1  Snow Accum Storm Tot 
+          	     R01  pc	   1  Liq Accum Cycle 
+        	     RTO  pt       1  Liq Accum Storm Tot 
         	
 Process humid:  LQ3  SH   sh      21  Specific Humidity 
-            	  LH3  RH3  rh      21  Relative Humidity 
-            	       RHL  rhl	    21  Relative Humidity with resp to liquid
-            	  LH4  TPW  tpw      1  Integrated Total Precipitable Water Vapor
+            	LH3  RH3  rh      21  Relative Humidity 
+            	     RHL  rhl     21  Relative Humidity with resp to liquid
+            	LH4  TPW  tpw      1  Integrated Total Precipitable Water Vapor
 
 Process wind:   LW3  U3   u       21  Wind u (wrt GRID NORTH)
-		                 V3   v       21  Wind v (wrt GRID EAST)
-          	         OM   om      21  Wind omega 
+		     V3   v       21  Wind v (wrt GRID EAST)
+          	     OM   om      21  Wind omega 
 
                 LWM  SU   u        1  Surface wind u (wrt GRID NORTH)
                      SV   v        1  Surface wind v (wrt GRID EAST)
 		
 Process cloud:	LC3  LC3  camt    42  Fractional Cloud Cover (levels 1-42)
 
-         	      LCB  LCB  cbas     1  Cloud base 
-		                 LCT  ctop     1  Cloud Top
-           	         CCE  cce      1  Cloud Ceiling
+         	LCB  LCB  cbas     1  Cloud base 
+		     LCT  ctop     1  Cloud Top
+           	     CCE  cce      1  Cloud Ceiling
 
-         	      LCV  LCV  ccov     1  Cloud Cover
-         	           CSC  csc      1  Cloud Analysis Implied Snow Cover
+         	LCV  LCV  ccov     1  Cloud Cover
+         	     CSC  csc      1  Cloud Analysis Implied Snow Cover
                      ALB           1  LAPS derived albedo
                      S3A           1  3.9u satellite data
                      S8A           1  11u satellite data
                      RQC           1  Radar QC information (2D vs 3D)
                      SWI           1  Downward Shortwave Radiation
 
-        	      LPS  REF  ref     21  LAPS Radar Reflectivity 
+        	LPS  REF  ref     21  LAPS Radar Reflectivity 
 
 Process deriv:  LCP  LCP  ccpc    21  Fractional Cloud Cover Pressure Coord
 
-		            LWC  LWC  lwc     21  Cloud Liquid Water 
-		                 ICE  ice	    21  Cloud Ice
-		                 PCN  pcn     21  Hydrometeor Concentration
-		                 RAI  rai     21  Rain Concentration
-		                 SNO  sno     21  Snow Concentration
-		                 PIC  pic     21  Precipitating Ice Concentration
+		LWC  LWC  lwc     21  Cloud Liquid Water 
+		     ICE  ice	  21  Cloud Ice
+		     PCN  pcn     21  Hydrometeor Concentration
+		     RAI  rai     21  Rain Concentration
+		     SNO  sno     21  Snow Concentration
+		     PIC  pic     21  Precipitating Ice Concentration
 
-           	    LIL  LIL  lil      1  Integrated Liquid Water
+           	LIL  LIL  lil      1  Integrated Liquid Water
                           lic      1  Cloud Ice
                           cod      1  Cloud Optical Depth
                           cla      1  Cloud Albedo
                           vis      1  Visibility
 
-        	      LCT  PTY  spt      1  Sfc Precip Type
+        	LCT  PTY  spt      1  Sfc Precip Type
                      PTT  ptt      1  LAPS Sfc Precip Type
                      SCT  sct      1  Sfc Cloud Type
 
-		            LMD  LMD  mcd     21  Mean Cloud Drop Diameter 
-		            LCO  COM  cw      21  Cloud omega 
-         	      LRP  LRP  icg     21  Icing Index
-		            CTY  CTY  ctyp    21  Cloud Type 
-		            PTY  PTY  ptyp    21  Precip Type 
+		LMD  LMD  mcd     21  Mean Cloud Drop Diameter 
+		LCO  COM  cw      21  Cloud omega 
+         	LRP  LRP  icg     21  Icing Index
+	        CTY  CTY  ctyp    21  Cloud Type 
+		PTY  PTY  ptyp    21  Precip Type 
 
-          	    LMT  LMT  etop     1  Max Echo Tops
-          	         LLR  llr	     1  Low Level Reflectivity
+          	LMT  LMT  etop     1  Max Echo Tops
+          	     LLR  llr	   1  Low Level Reflectivity
 
                 LST  LI   li       1  Lifted Index
-		                 PBE  pbe      1  Positive Bouyant Energy
-		                 NBE  nbe      1  Negative Bouyant Energy
+		     PBE  pbe      1  Positive Bouyant Energy
+		     NBE  nbe      1  Negative Bouyant Energy
                      SI   si       1  Showalter Index
                      TT   tt       1  Total Totals Index
                      K    k        1  K Index
@@ -248,14 +248,14 @@ Process deriv:  LCP  LCP  ccpc    21  Fractional Cloud Cover Pressure Coord
                 LWM  SU   u        1  Surface wind u (grid north)
                      SV   v        1  Surface wind v (grid east)
 
-		            LHE  LHE  hel      1  Helicity
+		LHE  LHE  hel      1  Helicity
                      MU   mu       1  Mean wind u (grid north)
-       		           MV   mv       1  Mean wind v (grid east)
+       		     MV   mv       1  Mean wind v (grid east)
            	
-		            LIW  LIW  liw      1  log(LI*omega)
-		                 UMF  umf	     1  Upslope Component of Moisture Flux
+		LIW  LIW  liw      1  log(LI*omega)
+		     UMF  umf	   1  Upslope Component of Moisture Flux
 
-		            LMR  R    mxrf     1  Column Max (Composite) Radar Reflectivity
+		LMR  R    mxrf     1  Column Max (Composite) Radar Reflectivity
 
                 LFR  HAH  hah      1  High Level Haines Index
                      HAM  ham      1  Mid Level Haines Index
@@ -266,29 +266,29 @@ Process deriv:  LCP  LCP  ccpc    21  Fractional Cloud Cover Pressure Coord
                      CWI  cwi      1  Critical Fire Weather Index
 
 Process soil:   LM1  LSM  lsm      3  Soil Moisture
-		            LM2  CIV  civ      1  Cumulative Infiltration Volume
-		                 DWF  dwf	     1  Depth to wetting front
-		                 WX   wx       1  Wet/Dry grid point
-		                 EVP  evp      1  Evaporation Data
-		                 SC   sc       1  Snow cover
-		                 SM   sm       1  Snow melt
-		                 MWF  mwf      1  Soil Moisture content Wetting Front
+		LM2  CIV  civ      1  Cumulative Infiltration Volume
+		     DWF  dwf	   1  Depth to wetting front
+		     WX   wx       1  Wet/Dry grid point
+		     EVP  evp      1  Evaporation Data
+		     SC   sc       1  Snow cover
+		     SM   sm       1  Snow melt
+		     MWF  mwf      1  Soil Moisture content Wetting Front
 
 LAPS Fcst Model:
                 FUA  U3   ru	  21  Fcst Model Wind u (grid north)
-		                 V3   rv	  21  Fcst Model Wind v (grid east)
-		                 HT	  rz	  21  Fcst Model Height (geopotential meters)
-		                 T3	  rt	  21  Fcst Model Temperature
-		                 SH	  rsh	  21  Fcst Model Specific Humidity
+		     V3   rv	  21  Fcst Model Wind v (grid east)
+		     HT	  rz	  21  Fcst Model Height (geopotential meters)
+		     T3	  rt	  21  Fcst Model Temperature
+		     SH	  rsh	  21  Fcst Model Specific Humidity
 		
-		            FSF  USF  usf 	   1  Fcst Model Surface wind u (grid north)
-	                   VSF  vsf 	   1  Fcst Model Surface wind v (grid east)
-		                 TSF  tsf 	   1  Fcst Model Surface Temperature
-		                 DSF  dsf 	   1  Fcst Model Dewpoint                 
+		FSF  USF  usf 	   1  Fcst Model Surface wind u (grid north)
+	             VSF  vsf 	   1  Fcst Model Surface wind v (grid east)
+		     TSF  tsf 	   1  Fcst Model Surface Temperature
+		     DSF  dsf 	   1  Fcst Model Dewpoint                 
                      RH   rh       1  Fcst Model Relative humidity 
                      LCB  lcb      1  Fcst Model Cloud base
                      LCT  lct      1  Fcst Model Cloud top
-		                 P	  p 	     1  Fcst Model 1500m pressure
+	             P    p 	   1  Fcst Model 1500m pressure
                      SLP  slp      1  Fcst Model MSL pressure
                      PSF  psf      1  Fcst Model Surface pressure
                      LIL  lil      1  Fcst Model Integrated cloud liquid water
