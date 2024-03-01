@@ -108,3 +108,279 @@ http://stevealbers.net/albers/README_out.html具有可点击的表格
 3.4.6 ..................  验证
 4.0 ............  将LAPS用户的代码模块移植回GSD
 5.0 ............  LAPS输出变量和netCDF文件组织
+-----------------1.0一般LAPS信息--------------------------------------
+以下是包含LAPS数据摄取和分析代码。设置LAPS的预测组件（例如WRF）单独（见第3.4节）。
+请注意，GSD不再为LAPS提供支持，尽管信用应提供给NOAA/ESRL/GSD、CIRA和CIRES。LAPS可用通过Gnu公共许可下的GitHub。为了获得支持，最好联系您可能认识的熟悉该系统的其他人。它是建议LAPS用户尝试利用最新的LAPS每隔几个月左右定期导入一个新的tar文件进行更新。
+LAPS软件的流程图可在以下位置找到：
+http://laps.noaa.gov/doc/Slide1.png
+----------------1.1 LAPS软件免责声明----------------
+开源许可证/免责声明，预测系统实验室NOAA/OAR/GSD，325 Broadway Boulder，CO 80305
+该软件是在开源定义下分发的，可以在http://www.opensource.org/.
+特别是以源和二进制形式的重新分配和使用，允许修改或不修改，前提是满足以下条件：
+-源代码的重新分发必须保留此通知，此条件列表和以下免责声明。
+-二进制形式的重新分发必须提供对此的访问权限
+通知、此条件列表和以下免责声明，以及底层源代码。
+-对该软件的所有修改都必须清楚地记录在案，并且完全由制作修改。
+-如果对此进行了重大修改或增强软件，GSD软件策略管理器(softwaremgr.fsl@noaa.gov)应通知。
+该软件及其文档属于公共领域并按原样提供。作者，美国政府、其机构、官员、雇员，以及代理人对其有用性不作任何明示或暗示的保证用于任何目的的软件和文档。他们认为不承担（1）使用软件的责任，以及文档；或者（2）为用户提供技术支持。
+--------4.0——将LAPS用户的代码模块移植回GSD--------------
+我们鼓励LAPS用户就如何改进提出建议LAPS，无论是在科学上还是在软件本身。这些变化应该可以通过下载最新的源代码树来制作。编辑您的更改在源文件中，然后重定向要发送的部分或全部源树回复我们。请说明您使用过的洛杉矶警察局版本号。任何
+与变更背后的推理相关的文件将是非常感谢。
+在某些情况下，不太正式的流程可能更容易通过用户可以以描述性的形式提供所建议的mod的文档，或者在编码之前和之后。然后代码作者可以实现GSD版本中的更改。这在MOD为简单，或者如果用户使用的是相对较旧版本的软件和/或最近对
+软件如果用户对所需的LAPS中的功能，但没有实际查看软件与实现该功能相关联的细节。
+-------5.0——LAPS输出变量和netCDF文件组织-----------
+LAPS变量和netCDF文件组织
+LAPS输出以netCDF格式编写，总结如下。每个文件扩展插件包含一组变量，这些变量进入下的一个单独目录'$LAPS_DATA_ROOT/lapsprd/'。此目录包括所谓的预平衡文件，而最终的平衡输出在“lapsprd/balance”子目录中。
+例如，LT1温度网格是用预平衡版本编写的在“lapsprd/lt1”中，平衡版本在“lapsprd/balance/lt1”中。
+映射投影属性在NetCDF文件中指定。这里有一些它们的定义：
+
+Lat1：左下角网格点的纬度
+Lon1：左下角网格点的经度
+Lov：地图上的经度投影，其中网格沿真正的南北方向定向
+
+请注意，字段等单位的netCDF信息包含在'$LAPS_DATA_ROOT/cdl/*.cdl'文件。列表的底部是一个部分在运行摄取时计算的“中间”文件上。
+
+                File LAPS CDF    Num
+		            Ext  Var  Var    Lvl  Field
+
+Process surface:LSX  U    su       1  Surface (10m) wind u (grid north)
+       		           V    sv       1  Surface (10m) wind v (grid east)
+        	           P    fp       1  Reduced Pressure (constant height sfc)
+        	           PP   pp       1  Perturbation Pressure (if available)
+            	       T    st       1  Temp (2m)
+		                 TD   std      1  Dewpt Temp
+                     TGD  tgd      1  Ground Temp (land surface/SST)
+        	           VV   vv	     1  Vertical Velocity
+		                 RH   srh      1  Relative Humidity
+		                 MSL  mp	     1  MSL Pressure
+         	           TAD  ta       1  Temp Advection
+        	           TH   pot      1  Potential Temp
+		                 THE  ept      1  Equivalent Potential Temp
+           	         PS   sp	     1  Station Pressure (terrain following)
+		                 VOR  vor	     1  Vorticity
+		                 MR   mr       1  Mixing Ratio  
+         	           MRC  mc       1  Moisture Flux Convergence
+        	           DIV  d	       1  Divergence
+		                 THA  pta      1  Potential Temp Advection
+		                 MRA  ma       1  Moisture Advection
+		                 SPD  spd	     1  Surface Wind Speed
+		                 CSS  cssi     1  CSSI
+		                 VIS  vis 	   1  Surface Visibility
+                     FWX  fwx      1  Fire Danger (LAPS / Kelsch)
+		                 HI   hi       1  Heat Index
+
+Process temp:   LT1  T3   t	  21  Temperature
+		            HT   z       21  Height (geopotential meters)
+
+                PBL  PTP  ptp      1  Boundary Layer Top (pressure)
+                     PDM  pdm      1  Boundary Layer Depth (in meters)
+
+Process accum:	L1S  S01  s1hr     1  Snow Accum Cycle 
+		                 STO  stot     1  Snow Accum Storm Tot 
+          	         R01  pc	     1  Liq Accum Cycle 
+        	           RTO  pt	     1  Liq Accum Storm Tot 
+        	
+Process humid:  LQ3  SH   sh      21  Specific Humidity 
+            	  LH3  RH3  rh      21  Relative Humidity 
+            	       RHL  rhl	    21  Relative Humidity with resp to liquid
+            	  LH4  TPW  tpw      1  Integrated Total Precipitable Water Vapor
+
+Process wind:   LW3  U3   u       21  Wind u (wrt GRID NORTH)
+		                 V3   v       21  Wind v (wrt GRID EAST)
+          	         OM   om      21  Wind omega 
+
+                LWM  SU   u        1  Surface wind u (wrt GRID NORTH)
+                     SV   v        1  Surface wind v (wrt GRID EAST)
+		
+Process cloud:	LC3  LC3  camt    42  Fractional Cloud Cover (levels 1-42)
+
+         	      LCB  LCB  cbas     1  Cloud base 
+		                 LCT  ctop     1  Cloud Top
+           	         CCE  cce      1  Cloud Ceiling
+
+         	      LCV  LCV  ccov     1  Cloud Cover
+         	           CSC  csc      1  Cloud Analysis Implied Snow Cover
+                     ALB           1  LAPS derived albedo
+                     S3A           1  3.9u satellite data
+                     S8A           1  11u satellite data
+                     RQC           1  Radar QC information (2D vs 3D)
+                     SWI           1  Downward Shortwave Radiation
+
+        	      LPS  REF  ref     21  LAPS Radar Reflectivity 
+
+Process deriv:  LCP  LCP  ccpc    21  Fractional Cloud Cover Pressure Coord
+
+		            LWC  LWC  lwc     21  Cloud Liquid Water 
+		                 ICE  ice	    21  Cloud Ice
+		                 PCN  pcn     21  Hydrometeor Concentration
+		                 RAI  rai     21  Rain Concentration
+		                 SNO  sno     21  Snow Concentration
+		                 PIC  pic     21  Precipitating Ice Concentration
+
+           	    LIL  LIL  lil      1  Integrated Liquid Water
+                          lic      1  Cloud Ice
+                          cod      1  Cloud Optical Depth
+                          cla      1  Cloud Albedo
+                          vis      1  Visibility
+
+        	      LCT  PTY  spt      1  Sfc Precip Type
+                     PTT  ptt      1  LAPS Sfc Precip Type
+                     SCT  sct      1  Sfc Cloud Type
+
+		            LMD  LMD  mcd     21  Mean Cloud Drop Diameter 
+		            LCO  COM  cw      21  Cloud omega 
+         	      LRP  LRP  icg     21  Icing Index
+		            CTY  CTY  ctyp    21  Cloud Type 
+		            PTY  PTY  ptyp    21  Precip Type 
+
+          	    LMT  LMT  etop     1  Max Echo Tops
+          	         LLR  llr	     1  Low Level Reflectivity
+
+                LST  LI   li       1  Lifted Index
+		                 PBE  pbe      1  Positive Bouyant Energy
+		                 NBE  nbe      1  Negative Bouyant Energy
+                     SI   si       1  Showalter Index
+                     TT   tt       1  Total Totals Index
+                     K    k        1  K Index
+                     LCL  lcl      1  Lifted Condensation Level
+                     WB0  wb0      1  Wet-Bulb Zero
+
+                LWM  SU   u        1  Surface wind u (grid north)
+                     SV   v        1  Surface wind v (grid east)
+
+		            LHE  LHE  hel      1  Helicity
+                     MU   mu       1  Mean wind u (grid north)
+       		           MV   mv       1  Mean wind v (grid east)
+           	
+		            LIW  LIW  liw      1  log(LI*omega)
+		                 UMF  umf	     1  Upslope Component of Moisture Flux
+
+		            LMR  R    mxrf     1  Column Max (Composite) Radar Reflectivity
+
+                LFR  HAH  hah      1  High Level Haines Index
+                     HAM  ham      1  Mid Level Haines Index
+                     FWI  fwi      1  Fosberg Fireweather Index
+                     VNT  vnt      1  Ventilation Index
+                     UPB  upb      1  PBL Mean Wind U-component (grid north)
+                     VPB  vpb      1  PBL Mean Wind V-component (grid east)
+                     CWI  cwi      1  Critical Fire Weather Index
+
+Process soil:   LM1  LSM  lsm      3  Soil Moisture
+		            LM2  CIV  civ      1  Cumulative Infiltration Volume
+		                 DWF  dwf	     1  Depth to wetting front
+		                 WX   wx       1  Wet/Dry grid point
+		                 EVP  evp      1  Evaporation Data
+		                 SC   sc       1  Snow cover
+		                 SM   sm       1  Snow melt
+		                 MWF  mwf      1  Soil Moisture content Wetting Front
+
+LAPS Fcst Model:
+                FUA  U3   ru	  21  Fcst Model Wind u (grid north)
+		                 V3   rv	  21  Fcst Model Wind v (grid east)
+		                 HT	  rz	  21  Fcst Model Height (geopotential meters)
+		                 T3	  rt	  21  Fcst Model Temperature
+		                 SH	  rsh	  21  Fcst Model Specific Humidity
+		
+		            FSF  USF  usf 	   1  Fcst Model Surface wind u (grid north)
+	                   VSF  vsf 	   1  Fcst Model Surface wind v (grid east)
+		                 TSF  tsf 	   1  Fcst Model Surface Temperature
+		                 DSF  dsf 	   1  Fcst Model Dewpoint                 
+                     RH   rh       1  Fcst Model Relative humidity 
+                     LCB  lcb      1  Fcst Model Cloud base
+                     LCT  lct      1  Fcst Model Cloud top
+		                 P	  p 	     1  Fcst Model 1500m pressure
+                     SLP  slp      1  Fcst Model MSL pressure
+                     PSF  psf      1  Fcst Model Surface pressure
+                     LIL  lil      1  Fcst Model Integrated cloud liquid water
+                     TPW  tpw      1  Fcst Model Total precipitable water vapor
+                     R01  r01      1  Fcst Model Liquid accum cycle     
+                     RTO  rto      1  Fcst Model Liquid accum storm total
+                     S01  s01      1  Fcst Model Snow accum cycle     
+                     STO  sto      1  Fcst Model Snow accum storm total
+                     TH   th       1  Fcst Model Potential temperature  
+                     THE  the      1  Fcst Model Equivalent potential temp
+                     PBE  pbe      1  Fcst Model Positive buoyant energy
+                     NBE  nbe      1  Fcst Model Negative buoyant energy
+                     PS   ps       1  Fcst Model Surface pressure
+                     CCE  cce      1  Fcst Model Cloud ceiling
+                     VIS  vis      1  Fcst Model Visibility
+                     LCV  lcv      1  Fcst Model Cloud cover
+                     LMT  lmt      1  Fcst Model Max echo tops
+                     SPT  spt      1  Fcst Model Sfc precip type
+                     LHE  lhe      1  Fcst Model Helicity
+                     LI   li       1  Fcst Model Lifted index
+                     HI   hi       1  Fcst Model Heat index
+                     SWI  swi      1  Downward Shortwave Radiation
+                     SWO  swo      1  Fcst Model Outgoing Shortwave Radiation
+                     LWO  lwo      1  Fcst Model Outgoing Longwave Radiation
+                     FWI  fwi      1  Fcst Model Fosberg fire weather index
+                     FWX  fwx      1  Fcst Model Kelsch fire weather index
+
+                RSM  LSM  lsm     11  Fcst Model Soil Moisture
+
+
+Intermediate LAPS files:
+
+Process vrc_driver:
+                VRC  REF  ref      1  NOWRAD 2D radar reflectivity
+
+Process mosaic_radar:
+                VRZ               21  (3D reflectivity mosaic)
+ 
+Process remap:  V01  REF  refd    21  Radar reflectivity
+                     VEL  veld    21  Radial Velocity    
+                     NYQ  nyqd    21  Nyquist velocity
+
+                files V02, V03, V04, V05, V06, V07, V08, V09, V10, V11,
+                      V12, V13, V14, V15, V16, V17, V18, V19, V20 same format
+
+Process lga.exe (background model):
+                LGA  HT   ht      21  Model isentrop height interp to LAPS 
+                                      isobaric (geopotential meters)
+                     T3   t       21  Model isentrop temp interp to LAPS isobaric
+                     SH   sh      21  Model specific humidity
+                     U3   u       21  Model u wind component (grid north)
+                     V3   v       21  Model v wind component (grid east)
+                     OM   om      21  Model vertical velocity (Pascals/second)
+
+            		LGB  USF  usf 	   1  Model Surface wind u (grid north)
+	                   VSF  vsf 	   1  Model Surface wind v (grid east)
+		                 TSF  tsf 	   1  Model Surface Temperature
+		                 TGD  tgd 	   1  Model Ground Temperature
+		                 DSF  dsf 	   1  Model Dewpoint                 
+                     SLP  slp      1  Model MSL pressure
+                     PSF  psf      1  Model Surface pressure
+                     RSF  rsf      1  Model Specific Humidity
+		                   P	  p 	   1  Model reduced pressure
+                     PCP  pcp      1  Model Precipitation
+
+Process lvd_sat_ingest:
+                LVD  S8W  s8w      1  GOES IR band-8 bright temp warmest pixel
+                     S8C  s8c      1  GOES IR band-8 bright temp coldest pixel
+                     SVS  svs      1  GOES visible satellite - raw
+                     SVN  svn      1  GOES visible satellite - normalized
+                     ALB  alb      1  albedo
+                     S3A  s3a      1  GOES IR band-3 bright temp averaged
+                     S3C  s3c      1  GOES IR band-3 bright temp filtered
+                     S4A  s4a      1  GOES IR band-4 bright temp averaged
+                     S4C  s4c      1  GOES IR band-4 bright temp filtered
+                     S5A  s5a      1  GOES IR band-5 bright temp averaged
+                     S5C  s5c      1  GOES IR band-5 bright temp filtered
+                     S8A  s8a      1  GOES IR band-8 bright temp averaged
+                     SCA  sca      1  GOES IR band-12 bright temp averaged
+                     SCC  scc      1  GOES IR band-12 bright temp averaged
+
+                     Note: band-8 is approx 11.2 microns.
+
+Static LAPS file - run by localization:
+
+gridgen_model.exe: creates file 'static.nest7grid'
+
+                     LAT           1  Latitude (degrees)
+                     LON           1  Longitude (degrees)
+                     AVG           1  Mean elevation MSL (m)
+                     STD           1  Unused
+                     ENV           1  Unused
+                     ZIN           1  Z coordinate - used for plotting in AVS
+                     LDF           1  Land Fraction (0=water,1=land)
+                     USE           1  Landuse
