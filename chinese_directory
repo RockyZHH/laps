@@ -141,23 +141,23 @@ Lov：地图上的经度投影，其中网格沿真正的南北方向定向
 请注意，字段等单位的netCDF信息包含在'$LAPS_DATA_ROOT/cdl/*.cdl'文件。列表的底部是一个部分在运行摄取时计算的“中间”文件上。
 
                 File LAPS CDF    Num
-		            Ext  Var  Var    Lvl  Field
+		Ext  Var  Var    Lvl  Field
 
 Process surface:LSX  U    su       1  Surface (10m) wind u (grid north)
-       		           V    sv       1  Surface (10m) wind v (grid east)
-        	           P    fp       1  Reduced Pressure (constant height sfc)
-        	           PP   pp       1  Perturbation Pressure (if available)
-            	       T    st       1  Temp (2m)
-		                 TD   std      1  Dewpt Temp
+       		     V    sv       1  Surface (10m) wind v (grid east)
+        	     P    fp       1  Reduced Pressure (constant height sfc)
+        	     PP   pp       1  Perturbation Pressure (if available)
+            	     T    st       1  Temp (2m)
+	             TD   std      1  Dewpt Temp
                      TGD  tgd      1  Ground Temp (land surface/SST)
-        	           VV   vv	     1  Vertical Velocity
-		                 RH   srh      1  Relative Humidity
-		                 MSL  mp	     1  MSL Pressure
-         	           TAD  ta       1  Temp Advection
-        	           TH   pot      1  Potential Temp
-		                 THE  ept      1  Equivalent Potential Temp
-           	         PS   sp	     1  Station Pressure (terrain following)
-		                 VOR  vor	     1  Vorticity
+    	             VV   vv	   1  Vertical Velocity
+		     RH   srh      1  Relative Humidity
+	             MSL  mp	   1  MSL Pressure
+         	     TAD  ta       1  Temp Advection
+        	     TH   pot      1  Potential Temp
+                     THE  ept      1  Equivalent Potential Temp
+           	     PS   sp	   1  Station Pressure (terrain following)
+		     VOR  vor	   1  Vorticity
 		                 MR   mr       1  Mixing Ratio  
          	           MRC  mc       1  Moisture Flux Convergence
         	           DIV  d	       1  Divergence
